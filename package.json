@@ -1,7 +1,25 @@
 {
   "name": "deploy_into_pages",
-  "private": true,
+  "description": "Github Actions plugin for uploading static files into Github Pages",
+  "keywords": [
+    "github",
+    "github",
+    "actions",
+    "github",
+    "pages"
+  ],
+  "homepage": "https://github.com/Rukomoynikov/deploy_into_pages#readme",
+  "bugs": {
+    "url": "https://github.com/Rukomoynikov/deploy_into_pages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rukomoynikov/deploy_into_pages.git"
+  },
+  "license": "ISC",
   "version": "0.0.0",
+  "author": "Max Rukomoynikov",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
