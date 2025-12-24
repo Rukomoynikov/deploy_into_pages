@@ -1,0 +1,13 @@
+{
+  "name": "deploy_into_pages",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  }
+}
