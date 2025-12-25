@@ -1,9 +1,10 @@
-import { test, vi, expect, describe } from "vitest";
+import { test, expect, describe } from "vitest";
 import {
   getArtifact,
   selectArtifact,
   type ArtifactsJSONSchema,
 } from "../src/artifacts.ts";
+import { mockFetch } from "./support/mocking_http.ts";
 
 describe("getArtifact", () => {
   const github_api_url = process.env.GITHUB_API_URL
@@ -21,12 +22,7 @@ describe("getArtifact", () => {
   process.env.GITHUB_REPOSITORY = `${owner}/${repo}`;
 
   test("it sends request to github api", async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(),
-      }),
-    );
+    mockFetch({resolver: url => url });
 
     await getArtifact({ run_id, github_token });
 
@@ -43,12 +39,7 @@ describe("getArtifact", () => {
   });
 
   test("it responds with error if status is not ok", async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: false,
-        status: 500,
-      }),
-    );
+    mockFetch({status: 500 });
 
     try {
       await getArtifact({ run_id, github_token });
