@@ -8,6 +8,8 @@ const context = {
   githubApiUrl: process.env.GITHUB_API_URL ?? "https://api.github.com",
   githubServerUrl: process.env.GITHUB_SERVER_URL ?? "https://github.com",
   artifactName: process.env.INPUT_ARTIFACT_NAME,
+  oidcTokenURL: process.env.ACTIONS_ID_TOKEN_REQUEST_URL,
+  oidcTokenBearerToken: process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN,
 };
 
 const withCheckedValues = (ctx: typeof context) => {
@@ -26,6 +28,8 @@ const withCheckedValues = (ctx: typeof context) => {
     githubApiUrl: string;
     githubServerUrl: string;
     artifactName: string;
+    oidcTokenURL: string;
+    oidcTokenBearerToken: string
   };
 };
 

@@ -1,4 +1,5 @@
 import { getArtifact, selectArtifact } from "./artifacts";
+import { createPageDeployment } from "./pages";
 import { context, withCheckedValues } from "./context";
 
 const contextValues = withCheckedValues(context);
@@ -20,7 +21,13 @@ async function main() {
     );
   }
 
-  console.log(selectedArtifact);
+  await createPageDeployment({
+    github_token: contextValues.githubToken,
+    artifact_id: selectedArtifact.id,
+    pages_build_version: contextValues.commitSHA,
+    oidc_token_url: contextValues.oidcTokenURL,
+    oidc_bearer_token: contextValues.oidcTokenBearerToken
+  });
 }
 
 main();
