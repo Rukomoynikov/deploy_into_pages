@@ -29,7 +29,7 @@ const withCheckedValues = (ctx: typeof context) => {
     githubServerUrl: string;
     artifactName: string;
     oidcTokenURL: string;
-    oidcTokenBearerToken: string
+    oidcTokenBearerToken: string;
   };
 };
 

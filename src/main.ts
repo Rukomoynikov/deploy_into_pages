@@ -26,7 +26,7 @@ async function main() {
     artifact_id: selectedArtifact.id,
     pages_build_version: contextValues.commitSHA,
     oidc_token_url: contextValues.oidcTokenURL,
-    oidc_bearer_token: contextValues.oidcTokenBearerToken
+    oidc_bearer_token: contextValues.oidcTokenBearerToken,
   });
 }
 

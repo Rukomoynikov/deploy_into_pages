@@ -22,7 +22,7 @@ describe("getArtifact", () => {
   process.env.GITHUB_REPOSITORY = `${owner}/${repo}`;
 
   test("it sends request to github api", async () => {
-    mockFetch({resolver: url => url });
+    mockFetch({ resolver: (url) => url });
 
     await getArtifact({ run_id, github_token });
 
@@ -39,7 +39,7 @@ describe("getArtifact", () => {
   });
 
   test("it responds with error if status is not ok", async () => {
-    mockFetch({status: 500 });
+    mockFetch({ status: 500 });
 
     try {
       await getArtifact({ run_id, github_token });

@@ -1,6 +1,6 @@
 name: Deploy into pages
 description: Github Actions plugin for uploading static files into Github Pages
-author: 'Max Rukomoynikov'
+author: "Max Rukomoynikov"
 
 runs:
   using: node20
@@ -8,14 +8,14 @@ runs:
 
 inputs:
   token:
-    description: 'GitHub token'
+    description: "GitHub token"
     default: ${{ github.token }}
     required: true
   artifact_name:
-    description: 'Name of the artifact to deploy'
+    description: "Name of the artifact to deploy"
     required: false
-    default: 'github-pages'
+    default: "github-pages"
 
 outputs:
   page_url:
-    description: 'URL to deployed GitHub Pages'
+    description: "URL to deployed GitHub Pages"

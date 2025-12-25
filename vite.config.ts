@@ -10,6 +10,6 @@ export default defineConfig({
       entry: resolve(__dirname, "src/main.ts"),
       name: "deploy_into_pages",
       fileName: "main",
-    }
+    },
   },
 });
