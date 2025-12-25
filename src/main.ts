@@ -1,19 +1,26 @@
-import { getArtifact } from "./get_artifact";
+import { getArtifact, selectArtifact } from "./artifacts";
 import { context, withCheckedValues } from "./context";
 
 const contextValues = withCheckedValues(context);
 
 async function main() {
-    const response = await getArtifact({
-        owner: contextValues.artifactName,
-        github_token: contextValues.githubToken,
-        repo: contextValues.repositoryNwo,
-        run_id: contextValues.workflowRunID,
-    });
+  const run_artifacts = await getArtifact({
+    github_token: contextValues.githubToken,
+    run_id: contextValues.workflowRunID,
+  });
 
-    const data = await response.json
+  const selectedArtifact = selectArtifact(
+    run_artifacts,
+    contextValues.artifactName,
+  );
 
-    console.log(data)
+  if (selectedArtifact == null) {
+    throw new Error(
+      `Couldn't find artifact with name ${contextValues.artifactName} in \n${JSON.stringify(run_artifacts)}`,
+    );
+  }
+
+  console.log(selectedArtifact);
 }
 
-main()
+main();
