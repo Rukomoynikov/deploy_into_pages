@@ -1,10 +1,12 @@
-import { getArtifact, selectArtifact } from "./artifacts";
+import { getArtifact, selectArtifact, uploadArtifact } from "./artifacts";
 import { createPageDeployment } from "./pages";
 import { context, withCheckedValues } from "./context";
 
 const contextValues = withCheckedValues(context);
 
 async function main() {
+  uploadArtifact();
+
   const run_artifacts = await getArtifact({
     github_token: contextValues.githubToken,
     run_id: contextValues.workflowRunID,

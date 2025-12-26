@@ -10,9 +10,10 @@ const context = {
   artifactName: process.env.INPUT_ARTIFACT_NAME,
   oidcTokenURL: process.env.ACTIONS_ID_TOKEN_REQUEST_URL,
   oidcTokenBearerToken: process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN,
+  runtimeToken: process.env.ACTIONS_RUNTIME_TOKEN,
 };
 
-const withCheckedValues = (ctx: typeof context) => {
+const withCheckedValues = (ctx: typeof context = context) => {
   for (const [key, value] of Object.entries(ctx)) {
     if (value === undefined || value === "") {
       throw new Error(`Missing required context value: ${key}`);
@@ -30,6 +31,7 @@ const withCheckedValues = (ctx: typeof context) => {
     artifactName: string;
     oidcTokenURL: string;
     oidcTokenBearerToken: string;
+    runtimeToken: string;
   };
 };
 

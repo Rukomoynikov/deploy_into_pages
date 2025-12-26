@@ -1,3 +1,6 @@
+import { withCheckedValues } from "./context";
+import { jwtDecode } from "jwt-decode";
+
 interface getArtifactParams {
   run_id: string;
   github_token: string;
@@ -22,6 +25,36 @@ export interface ArtifactSchema {
     head_branch: string;
     head_sha: string;
   };
+}
+
+export interface runtimeDecodedToken {
+  IdentityTypeClaim: string;
+  ac: string;
+  acsl: string;
+  aud: string;
+  billing_owner_id: string;
+  exp: number;
+  "http://schemas.microsoft.com/ws/2008/06/identity/claims/primarysid": string;
+  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid": string;
+  iat: number;
+  iss: string;
+  job_id: string;
+  nameid: string;
+  nbf: number;
+  oidc_extra: string;
+  oidc_sub: string;
+  orch_id: string;
+  owner_id: string;
+  plan_id: string;
+  repository_id: string;
+  run_id: string;
+  run_number: string;
+  run_type: string;
+  runner_id: string;
+  runner_type: string;
+  scp: string;
+  sha: string;
+  trust_tier: string;
 }
 
 export interface ArtifactsJSONSchema {
@@ -54,6 +87,18 @@ const getArtifact = async ({
   return data;
 };
 
+const uploadArtifact = () => {
+  const context = withCheckedValues();
+  const runtimeToken = context.runtimeToken;
+  console.log(context.runtimeToken);
+
+  const decoded = jwtDecode<runtimeDecodedToken>(runtimeToken);
+  const scpParts = decoded.scp.split(" ");
+
+  console.log(decoded);
+  console.log(scpParts);
+};
+
 const selectArtifact = (
   artifacts: ArtifactsJSONSchema,
   artifact_name: string,
@@ -69,4 +114,4 @@ const selectArtifact = (
   return null;
 };
 
-export { getArtifact, selectArtifact };
+export { getArtifact, selectArtifact, uploadArtifact };
